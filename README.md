@@ -15,4 +15,4 @@ Fork repo to your github, create a branch and make your changes
 
 ## Please Add Documentation
 
-Please write a short description as you write a new piece of the app
+You can find a `README.md` file in each of the project folders, please write a short description as you write a new piece of the app.
