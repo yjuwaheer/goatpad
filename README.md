@@ -11,8 +11,10 @@
 
 ## Contributing
 
-Fork repo to your github, create a branch and make your changes
+1 Fork repo to your github
+2 create a branch and make your changes
+3 make a PR and wait patiently for your code to be reviewed
 
 ## Please Add Documentation
 
-Please write a short description as you write a new piece of the app
+Please write a short description as you write a new piece of the app, each package has it's own readme with a LOG section
