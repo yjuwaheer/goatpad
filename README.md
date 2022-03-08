@@ -11,9 +11,10 @@
 
 ## Contributing
 
-1 Fork repo to your github
-2 create a branch and make your changes
-3 make a PR and wait patiently for your code to be reviewed
+1. Fork repo to your github
+2. create a branch named `package/feature` (like `client/navbar-login`) and make your changes
+3. make a PR and make sure you include issue your PR cover in the comments
+4. wait patiently for your code to be reviewed
 
 ## Please Add Documentation
 
