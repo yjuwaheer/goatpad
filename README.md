@@ -11,8 +11,12 @@
 
 ## Contributing
 
-Fork repo to your github, create a branch and make your changes
+1. Fork repo to your github
+2. create a branch named `package/feature` (like `client/navbar-login`) and make your changes
+3. make a PR and make sure you include issue your PR cover in the comments
+4. wait patiently for your code to be reviewed
 
 ## Please Add Documentation
 
-You can find a `README.md` file in each of the project folders, please write a short description as you write a new piece of the app.
+You can find a `README.md` file in each of the package folders, please write a short description as you write a new piece of the app.
+
