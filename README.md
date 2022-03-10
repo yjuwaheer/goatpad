@@ -18,4 +18,5 @@
 
 ## Please Add Documentation
 
-Please write a short description as you write a new piece of the app, each package has it's own readme with a LOG section
+You can find a `README.md` file in each of the package folders, please write a short description as you write a new piece of the app.
+
