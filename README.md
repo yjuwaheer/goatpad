@@ -11,7 +11,7 @@
 
 ## Setup
 
-1. clone
+1. clone your fork
 2. run `yarn` - this downloads all dependencies for the project
 3. in the directory `/packages/server` run `cp .env.example .env` to add .env file containing port environment variable
 4. run `yarn dev` - this starts both the server and the client
