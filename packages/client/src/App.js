@@ -4,6 +4,8 @@ import { collection, addDoc } from 'firebase/firestore'
 import { db } from './config/firebase.ts'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
+import Posts from './features/posts'
+
 const auth = getAuth()
 
 function App() {
@@ -52,6 +54,7 @@ function App() {
       <button label='add user' onClick={addUser}>
         add user
       </button>
+      <Posts />
     </div>
   )
 }
