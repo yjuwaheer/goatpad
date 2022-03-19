@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "rollup": "rollup -c",
+    "rollup": "rollup -c -w",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
