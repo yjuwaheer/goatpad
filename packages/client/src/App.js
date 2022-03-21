@@ -1,8 +1,10 @@
 import React from 'react'
-// import { Button } from '@goatpad/library'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { collection, addDoc } from 'firebase/firestore'
 import { db } from './config/firebase.ts'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+
+import Navbar from './components/Navbar'
 
 import Posts from './features/posts'
 
@@ -44,18 +46,24 @@ function App() {
   }
 
   return (
-    <div className='App'>
-      <h1>Goatpad</h1>
-      <form onSubmit={handleLogin}>
-        <input type='email' name='email' placeholder='Email' />
-        <input type='password' name='password' placeholder='Password' />
-        <button type='submit'>Login</button>
-      </form>
-      <button label='add user' onClick={addUser}>
-        add user
-      </button>
-      <Posts />
-    </div>
+    <>
+      <Navbar />
+      <div className='App'>
+        <form onSubmit={handleLogin}>
+          <input type='email' name='email' placeholder='Email' />
+          <input type='password' name='password' placeholder='Password' />
+          <button type='submit'>Login</button>
+        </form>
+        <button label='add user' onClick={addUser}>
+          add user
+        </button>
+      </div>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Posts />} />
+        </Routes>
+      </Router>
+    </>
   )
 }
 
