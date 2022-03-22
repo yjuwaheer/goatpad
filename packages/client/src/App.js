@@ -5,6 +5,7 @@ import { db } from './config/firebase.ts'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 import Posts from './features/posts'
 
@@ -63,6 +64,7 @@ function App() {
           <Route path='/' element={<Posts />} />
         </Routes>
       </Router>
+      <Footer />
     </>
   )
 }
