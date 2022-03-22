@@ -9,7 +9,14 @@
 3. make a PR and make sure you include issue your PR cover in the comments
 4. wait patiently for your code to be reviewed
 
+## Requirements
+
+Make sure yarn is intalled globally  
+```
+npm i -g yarn
+```
 ## Setup
+
 
 1. clone your fork
 2. cd into your fork
