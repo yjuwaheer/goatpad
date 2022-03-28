@@ -29,3 +29,15 @@ Add directory structure and descriptions of proposed contents
 Moved `firebase.ts` to config folder.
 
 ---
+
+### March 21, 2022
+
+Add components for viewing and creating posts and connected form to database
+
+---
+
+### March 22, 2022
+
+Add CSS Reset
+Adjust styles in Navbar
+Add Footer component

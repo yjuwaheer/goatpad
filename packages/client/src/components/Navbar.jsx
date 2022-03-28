@@ -16,12 +16,15 @@ const NavbarContainer = styled.div`
 `
 
 const AppTitle = styled.h1`
-  height: 30px;
+  font-size: 20px;
   margin-top: 0px;
 `
 
 const NavbarButtonContainer = styled.div`
+  width: 30%;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
 `
 
 const Navbar = () => {
