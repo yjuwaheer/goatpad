@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { collection, addDoc } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 
 import { db } from '../../../config/firebase.ts'
 
+const auth = getAuth()
 const initialState = {
   title: '',
   post: '',
@@ -23,7 +25,7 @@ const PostForm = () => {
     try {
       const docRef = await addDoc(collection(db, 'posts'), {
         ...formData,
-        uid: 99,
+        uid: auth.currentUser.uid,
       })
       console.log('Document written with ID: ', docRef.id)
     } catch (e) {
