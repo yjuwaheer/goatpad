@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../stores/AuthContext'
 import styled from 'styled-components'
 
 const NavbarContainer = styled.div`
@@ -25,12 +27,20 @@ const NavbarButtonContainer = styled.div`
 `
 
 const Navbar = () => {
+  const { currentUser } = useAuth()
+
   return (
     <NavbarContainer>
       <AppTitle>Goatpad</AppTitle>
+      {currentUser ? currentUser.email : 'Logged Out'}
       <NavbarButtonContainer>
-        <p>Login</p>
-        <p>Signup</p>
+        <Link to='/login'>
+          <p>Login</p>
+        </Link>
+        <Link to='/signup'>
+          <p>Signup</p>
+        </Link>
+        <Link to='/logout'>Logout</Link>
       </NavbarButtonContainer>
     </NavbarContainer>
   )

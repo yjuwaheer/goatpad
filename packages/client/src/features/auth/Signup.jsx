@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { useAuth } from '../../stores/AuthContext'
 
-const auth = getAuth()
 const initialState = {
   email: '',
   password: '',
 }
 
 function Signup() {
+  const { signup } = useAuth()
   const [formData, setFormData] = useState(initialState)
 
   const { email, password } = formData
@@ -19,28 +19,27 @@ function Signup() {
   async function handleSignUp(event) {
     event.preventDefault()
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user
-        console.log(user)
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log(errorCode, errorMessage)
-      })
+    /* TODO: Add validation here */
+
+    try {
+      await signup(email, password)
+    } catch (error) {
+      console.error('Failed to create an account')
+    }
 
     // Clearing inputs after successful signup
     setFormData(initialState)
   }
 
   return (
-    <form onSubmit={handleSignUp} className='signUpForm'>
-      <input type='email' name='email' placeholder='Email' onChange={onChange} value={email} />
-      <input type='password' name='password' placeholder='Password' onChange={onChange} value={password} />
-      <button type='submit'>register</button>
-    </form>
+    <>
+      <h1>Sign Up</h1>
+      <form onSubmit={handleSignUp} className='signUpForm'>
+        <input type='email' name='email' placeholder='Email' onChange={onChange} value={email} />
+        <input type='password' name='password' placeholder='Password' onChange={onChange} value={password} />
+        <button type='submit'>register</button>
+      </form>
+    </>
   )
 }
 
