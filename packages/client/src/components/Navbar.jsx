@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../stores/AuthContext'
 import styled from 'styled-components'
 
@@ -27,7 +27,17 @@ const NavbarButtonContainer = styled.div`
 `
 
 const Navbar = () => {
-  const { currentUser } = useAuth()
+  const { currentUser, logout } = useAuth()
+  const navigate = useNavigate()
+
+  async function handleLogout() {
+    try {
+      await logout()
+    } catch (error) {
+      console.error(error)
+    }
+    navigate('/')
+  }
 
   return (
     <NavbarContainer>
@@ -40,7 +50,7 @@ const Navbar = () => {
         <Link to='/signup'>
           <p>Signup</p>
         </Link>
-        <Link to='/logout'>Logout</Link>
+        <p onClick={handleLogout}>Logout</p>
       </NavbarButtonContainer>
     </NavbarContainer>
   )

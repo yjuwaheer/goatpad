@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../stores/AuthContext'
 
 const initialState = {
@@ -7,6 +8,7 @@ const initialState = {
 }
 
 function Signup() {
+  const navigate = useNavigate()
   const { signup } = useAuth()
   const [formData, setFormData] = useState(initialState)
 
@@ -29,6 +31,8 @@ function Signup() {
 
     // Clearing inputs after successful signup
     setFormData(initialState)
+
+    navigate('/')
   }
 
   return (
