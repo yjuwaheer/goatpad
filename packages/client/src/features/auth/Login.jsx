@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 const auth = getAuth()
 const initialState = {
@@ -7,7 +8,7 @@ const initialState = {
   password: '',
 }
 
-function Signup() {
+function Login() {
   const [formData, setFormData] = useState(initialState)
 
   const { email, password } = formData
@@ -16,10 +17,14 @@ function Signup() {
     setFormData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
   }
 
-  async function handleSignUp(event) {
+  async function handleLogin(event) {
     event.preventDefault()
+    // const {
+    //   email: { value: email },
+    //   password: { value: password },
+    // } = event.target.elements
 
-    createUserWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user
@@ -36,12 +41,12 @@ function Signup() {
   }
 
   return (
-    <form onSubmit={handleSignUp} className='signUpForm'>
+    <form onSubmit={handleLogin} className='loginForm'>
       <input type='email' name='email' placeholder='Email' onChange={onChange} value={email} />
       <input type='password' name='password' placeholder='Password' onChange={onChange} value={password} />
-      <button type='submit'>register</button>
+      <button type='submit'>Login</button>
     </form>
   )
 }
 
-export default Signup
+export default Login

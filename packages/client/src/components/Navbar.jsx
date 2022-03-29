@@ -1,9 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Signin from '../features/auth/Signin'
-import Signup from '../features/auth/Signup'
-
 const NavbarContainer = styled.div`
   height: 34px;
   width: 100vw;
@@ -32,8 +29,8 @@ const Navbar = () => {
     <NavbarContainer>
       <AppTitle>Goatpad</AppTitle>
       <NavbarButtonContainer>
-        <Signin />
-        <Signup />
+        <p>Login</p>
+        <p>Signup</p>
       </NavbarButtonContainer>
     </NavbarContainer>
   )
