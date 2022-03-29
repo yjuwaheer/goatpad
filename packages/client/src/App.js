@@ -1,64 +1,39 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { collection, addDoc } from 'firebase/firestore'
-import { db } from './config/firebase.ts'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+// eslint-disable-next-line
+import firebaseApp from './config/firebase.ts'
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
+import Login from './features/auth/Login'
+import Signup from './features/auth/Signup'
+
 import Posts from './features/posts'
 
-const auth = getAuth()
-
 function App() {
-  async function handleLogin(event) {
-    event.preventDefault()
-    const {
-      email: { value: email },
-      password: { value: password },
-    } = event.target.elements
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user
-        console.log(user)
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log(errorCode, errorMessage)
-      })
-  }
-
-  async function addUser() {
-    try {
-      const docRef = await addDoc(collection(db, 'users'), {
-        first: 'Ada',
-        last: 'Lovelace',
-        born: 1815,
-      })
-      console.log('Document written with ID: ', docRef.id)
-    } catch (e) {
-      console.error('Error adding document: ', e)
-    }
-  }
+  // async function addUser() {
+  //   try {
+  //     const docRef = await addDoc(collection(db, 'users'), {
+  //       first: 'Ada',
+  //       last: 'Lovelace',
+  //       born: 1815,
+  //     })
+  //     console.log('Document written with ID: ', docRef.id)
+  //   } catch (e) {
+  //     console.error('Error adding document: ', e)
+  //   }
+  // }
 
   return (
     <>
       <Navbar />
+
       <div className='App'>
-        <form onSubmit={handleLogin}>
-          <input type='email' name='email' placeholder='Email' />
-          <input type='password' name='password' placeholder='Password' />
-          <button type='submit'>Login</button>
-        </form>
-        <button label='add user' onClick={addUser}>
-          add user
-        </button>
+        <Signup />
+        <Login />
       </div>
+
       <Router>
         <Routes>
           <Route path='/' element={<Posts />} />
