@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../stores/AuthContext'
 
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-
-const auth = getAuth()
 const initialState = {
   email: '',
   password: '',
 }
 
 function Login() {
-  const [formData, setFormData] = useState(initialState)
+  const navigate = useNavigate()
+  const { login } = useAuth()
 
+  const [formData, setFormData] = useState(initialState)
   const { email, password } = formData
 
   const onChange = (e) => {
@@ -19,25 +20,19 @@ function Login() {
 
   async function handleLogin(event) {
     event.preventDefault()
-    // const {
-    //   email: { value: email },
-    //   password: { value: password },
-    // } = event.target.elements
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user
-        console.log(user)
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log(errorCode, errorMessage)
-      })
+    /* TODO: add validation */
+
+    try {
+      await login(email, password)
+    } catch (error) {
+      console.error(error)
+    }
 
     // Clearing inputs after successful signup
     setFormData(initialState)
+
+    navigate('/')
   }
 
   return (

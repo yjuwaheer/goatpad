@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { collection, addDoc } from 'firebase/firestore'
-import { getAuth } from 'firebase/auth'
+import { useAuth } from '../../../stores/AuthContext'
 
 import { db } from '../../../config/firebase.ts'
 
-const auth = getAuth()
 const initialState = {
   title: '',
   post: '',
 }
 
 const PostForm = () => {
+  const { currentUser } = useAuth()
   const [formData, setFormData] = useState(initialState)
 
   const { title, post } = formData
@@ -25,7 +25,7 @@ const PostForm = () => {
     try {
       const docRef = await addDoc(collection(db, 'posts'), {
         ...formData,
-        uid: auth.currentUser.uid,
+        uid: currentUser.uid,
       })
       console.log('Document written with ID: ', docRef.id)
     } catch (e) {

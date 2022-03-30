@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../stores/AuthContext'
 import styled from 'styled-components'
 
 const NavbarContainer = styled.div`
@@ -25,12 +27,30 @@ const NavbarButtonContainer = styled.div`
 `
 
 const Navbar = () => {
+  const { currentUser, logout } = useAuth()
+  const navigate = useNavigate()
+
+  async function handleLogout() {
+    try {
+      await logout()
+    } catch (error) {
+      console.error(error)
+    }
+    navigate('/')
+  }
+
   return (
     <NavbarContainer>
       <AppTitle>Goatpad</AppTitle>
+      {currentUser ? currentUser.email : 'Logged Out'}
       <NavbarButtonContainer>
-        <p>Login</p>
-        <p>Signup</p>
+        <Link to='/login'>
+          <p>Login</p>
+        </Link>
+        <Link to='/signup'>
+          <p>Signup</p>
+        </Link>
+        <p onClick={handleLogout}>Logout</p>
       </NavbarButtonContainer>
     </NavbarContainer>
   )
