@@ -10,6 +10,8 @@ import Footer from './components/Footer'
 import Login from './features/auth/Login'
 import Signup from './features/auth/Signup'
 import Posts from './features/posts'
+import About from './features/about/About'
+import Profile from './features/profile/Profile'
 
 function App() {
   return (
@@ -20,7 +22,8 @@ function App() {
         <Route path='/' element={<Posts />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
-        {/* <Route path='/' element={<Posts />} /> */}
+        <Route path='/about' element={<About />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
       <Footer />
     </AuthProvider>
