@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import firebaseApp from './config/firebase.ts'
 
 import { AuthProvider } from './stores/AuthContext'
+import { PostsProvider } from './stores/PostsContext'
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -14,15 +15,17 @@ import Posts from './features/posts'
 function App() {
   return (
     <AuthProvider>
-      <Navbar />
+      <PostsProvider>
+        <Navbar />
 
-      <Routes>
-        <Route path='/' element={<Posts />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/login' element={<Login />} />
-        {/* <Route path='/' element={<Posts />} /> */}
-      </Routes>
-      <Footer />
+        <Routes>
+          <Route path='/' element={<Posts />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login />} />
+          {/* <Route path='/' element={<Posts />} /> */}
+        </Routes>
+        <Footer />
+      </PostsProvider>
     </AuthProvider>
   )
 }
