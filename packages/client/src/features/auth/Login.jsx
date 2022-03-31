@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../stores/AuthContext'
 
 const initialState = {
@@ -36,11 +36,17 @@ function Login() {
   }
 
   return (
-    <form onSubmit={handleLogin} className='loginForm'>
-      <input type='email' name='email' placeholder='Email' onChange={onChange} value={email} />
-      <input type='password' name='password' placeholder='Password' onChange={onChange} value={password} />
-      <button type='submit'>Login</button>
-    </form>
+    <>
+      <form onSubmit={handleLogin} className='loginForm'>
+        <input type='email' name='email' placeholder='Email' onChange={onChange} value={email} />
+        <input type='password' name='password' placeholder='Password' onChange={onChange} value={password} />
+        <button type='submit'>Login</button>
+      </form>
+      <div>
+        <p>Don&apos;t have an account yet?</p>
+        <Link to='/signup'>Sign Up!</Link>
+      </div>
+    </>
   )
 }
 
