@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../stores/AuthContext'
 
 const initialState = {
@@ -43,6 +43,10 @@ function Signup() {
         <input type='password' name='password' placeholder='Password' onChange={onChange} value={password} />
         <button type='submit'>register</button>
       </form>
+      <div>
+        <p>Already have an account?</p>
+        <Link to='/login'>Login!</Link>
+      </div>
     </>
   )
 }

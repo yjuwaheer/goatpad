@@ -41,16 +41,32 @@ const Navbar = () => {
 
   return (
     <NavbarContainer>
-      <AppTitle>Goatpad</AppTitle>
-      {currentUser ? currentUser.email : 'Logged Out'}
+      <Link to='/'>
+        <AppTitle>Goatpad</AppTitle>
+      </Link>
       <NavbarButtonContainer>
-        <Link to='/login'>
-          <p>Login</p>
+        <Link to='/about'>
+          <p>About</p>
         </Link>
-        <Link to='/signup'>
-          <p>Signup</p>
-        </Link>
-        <p onClick={handleLogout}>Logout</p>
+        {!currentUser ? (
+          <>
+            <Link to='/signup'>
+              <p>Signup</p>
+            </Link>
+            <Link to='/login'>
+              <p>Login</p>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to='/profile'>
+              <p>Profile</p>
+            </Link>
+            <Link to='/'>
+              <p onClick={handleLogout}>Logout</p>
+            </Link>
+          </>
+        )}
       </NavbarButtonContainer>
     </NavbarContainer>
   )
