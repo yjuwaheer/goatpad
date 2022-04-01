@@ -8,15 +8,34 @@ const PostCard = styled.div`
   padding: 3px;
 `
 
-const Post = () => {
+const Topics = styled.div`
+  background-color: #999;
+  padding: 6px;
+  display: flex;
+`
+
+const Topic = styled.div`
+  background-color: #333;
+  color: #ccc;
+  padding: 3px;
+  margin-right: 3px;
+`
+
+const Post = ({ postData }) => {
+  const { title, topics, uid, body } = postData
+
   return (
     <PostCard>
-      <h3>Post Title</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias voluptatum harum repudiandae? Cupiditate
-        maiores non animi accusamus saepe vitae incidunt! Neque, eligendi ipsam! Dolores, tempore facere nam expedita
-        nesciunt reprehenderit!
-      </p>
+      {topics ? (
+        <Topics>
+          {topics.map((topic) => (
+            <Topic key={topic}>{topic}</Topic>
+          ))}
+        </Topics>
+      ) : null}
+      <h3>{title}</h3>
+      <h4>{uid}</h4>
+      <p>{body}</p>
     </PostCard>
   )
 }
