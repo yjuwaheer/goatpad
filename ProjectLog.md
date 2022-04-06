@@ -41,3 +41,30 @@ Add components for viewing and creating posts and connected form to database
 Add CSS Reset
 Adjust styles in Navbar
 Add Footer component
+
+---
+
+### March 23 - April 6, 2022
+
+Refactor Auth to context
+Refactor Posts to context
+Successfully signing up with email and password
+Successfully logging in and out
+Successfully adding posts to database
+Successfully adding user id to posts
+Add tags to posts
+Conditionally render login/signup and logout buttons based on if a user is signed in
+Add React-hook-form and validation tools yup and hookform-resolvers to handle form input validation
+Add firebase-tools to allow deployment of site
+
+---
+
+---
+
+## MONOLITHIC REFACTOR - April 6, 2022
+
+Decided that monorepo was unnecessary. So, for ease of use by new members, converted client to a monolithic repo.
+
+---
+
+---
