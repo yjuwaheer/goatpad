@@ -8,8 +8,8 @@ import * as yup from 'yup'
 const schema = yup.object({
   username: yup.string().required(),
   email: yup.string().email().required(),
-  password: yup.string().required(),
-  password2: yup.string().required(),
+  password: yup.string().min(6).max(64).required(),
+  password2: yup.string().oneOf([yup.ref('password'), null]),
 })
 
 function Signup() {
