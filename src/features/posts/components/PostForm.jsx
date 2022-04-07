@@ -1,45 +1,54 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { collection, addDoc } from 'firebase/firestore'
 import { useAuth } from '../../../stores/AuthContext'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 import { db } from '../../../config/firebase.ts'
-
-const initialState = {
-  title: '',
-  post: '',
-}
+import { postFormSchema } from './postFormSchema'
 
 const PostForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      title: '',
+      postBody: '',
+    },
+    resolver: yupResolver(postFormSchema),
+  })
+
   const { currentUser } = useAuth()
-  const [formData, setFormData] = useState(initialState)
 
-  const { title, post } = formData
-
-  const onChange = (e) => {
-    setFormData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
-  }
-
-  const onSubmit = async (e) => {
+  const onSubmit = async (data) => {
     // TODO: submit data to firebase
-    e.preventDefault()
     try {
       const docRef = await addDoc(collection(db, 'posts'), {
-        ...formData,
+        ...data,
+        topics: [currentUser.uid],
         uid: currentUser.uid,
       })
       console.log('Document written with ID: ', docRef.id)
     } catch (e) {
       console.error('Error adding document: ', e)
     }
-
-    setFormData(initialState)
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <input type='text' name='title' onChange={onChange} value={title} />
-      <input type='text' name='post' onChange={onChange} value={post} />
-      <button type='submit'>Submit</button>
+    <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+      <div className='form-group'>
+        <input type='text' name='title' {...register('title')} placeholder='Enter a title' />
+        <p>{errors.title?.message}</p>
+      </div>
+      <div className='form-group'>
+        <input type='text' name='postBody' {...register('postBody')} placeholder='Enter your post' />
+        <p>{errors.postBody?.message}</p>
+      </div>
+      <div className='form-group'>
+        <button type='submit'>Submit</button>
+      </div>
     </form>
   )
 }
