@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <NavbarContainer>
       <Link to='/'>
-        <AppTitle>Goatpad</AppTitle>
+        <AppTitle>Goat-pad</AppTitle>
       </Link>
       <NavbarButtonContainer>
         <Link to='/about'>
