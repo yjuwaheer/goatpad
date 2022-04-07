@@ -45,25 +45,27 @@ function Signup() {
       >
         <div className='form-group'>
           <label htmlFor='username'>Username</label>
-          <input name='username' type='text' {...register('username')} placeholder='Username' />
+          <input type='text' name='username' {...register('username')} placeholder='Username' />
           <p>{errors.username?.message}</p>
         </div>
         <div className='form-group'>
           <label htmlFor='email'>Email</label>
-          <input name='email' type='email' {...register('email')} placeholder='Email' />
+          <input type='email' name='email' {...register('email')} placeholder='Email' />
           <p>{errors.email?.message}</p>
         </div>
         <div className='form-group'>
           <label htmlFor='password'>Password</label>
-          <input name='password' type='password' {...register('password')} placeholder='Password' />
+          <input type='password' name='password' {...register('password')} placeholder='Password' />
           <p>{errors.password?.message}</p>
         </div>
         <div className='form-group'>
           <label htmlFor='password2'>Confirm Password</label>
-          <input name='password2' type='password' {...register('password2')} placeholder='Confirm Password' />
+          <input type='password' name='password2' {...register('password2')} placeholder='Confirm Password' />
           <p>{errors.password2?.message}</p>
         </div>
-        <button type='submit'>register</button>
+        <div className='form-group'>
+          <button type='submit'>Register</button>
+        </div>
       </form>
       <div>
         <p>Already have an account?</p>

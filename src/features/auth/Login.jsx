@@ -1,46 +1,55 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../stores/AuthContext'
-
-const initialState = {
-  email: '',
-  password: '',
-}
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { loginSchema } from './formSchema'
 
 function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    resolver: yupResolver(loginSchema),
+  })
+
   const navigate = useNavigate()
   const { login } = useAuth()
 
-  const [formData, setFormData] = useState(initialState)
-  const { email, password } = formData
-
-  const onChange = (e) => {
-    setFormData((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
-  }
-
-  async function handleLogin(event) {
-    event.preventDefault()
-
-    /* TODO: add validation */
-
+  async function handleLogin({ email, password }) {
     try {
       await login(email, password)
     } catch (error) {
       console.error(error)
     }
 
-    // Clearing inputs after successful signup
-    setFormData(initialState)
-
     navigate('/')
   }
 
   return (
     <>
-      <form onSubmit={handleLogin} className='loginForm'>
-        <input type='email' name='email' placeholder='Email' onChange={onChange} value={email} />
-        <input type='password' name='password' placeholder='Password' onChange={onChange} value={password} />
-        <button type='submit'>Login</button>
+      <form
+        onSubmit={handleSubmit((data) => {
+          handleLogin(data)
+        })}
+        className='loginForm'
+      >
+        <div className='form-group'>
+          <input type='email' name='email' {...register('email')} placeholder='Email' />
+          <p>{errors.email?.message}</p>
+        </div>
+        <div className='form-group'>
+          <input type='password' name='password' {...register('password')} placeholder='Password' />
+          <p>{errors.password?.message}</p>
+        </div>
+        <div className='form-group'>
+          <button type='submit'>Login</button>
+        </div>
       </form>
       <div>
         <p>Don&apos;t have an account yet?</p>
