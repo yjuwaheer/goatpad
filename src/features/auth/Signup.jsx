@@ -1,16 +1,9 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-// import { useAuth } from '../../stores/AuthContext'
+import { useAuth } from '../../stores/AuthContext'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-
-const schema = yup.object({
-  username: yup.string().required(),
-  email: yup.string().email().required(),
-  password: yup.string().min(6).max(64).required(),
-  password2: yup.string().oneOf([yup.ref('password'), null]),
-})
+import { signUpSchema } from './formSchema'
 
 function Signup() {
   const {
@@ -24,14 +17,15 @@ function Signup() {
       password: '',
       password2: '',
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(signUpSchema),
   })
+
   const navigate = useNavigate()
-  // const { signup } = useAuth()
+  const { signup } = useAuth()
 
   async function handleSignUp({ username, email, password, password2 }) {
     try {
-      // await signup(email, password)
+      await signup(email, password)
       console.log(username, email, password, password2)
     } catch (error) {
       console.error('Failed to create an account')
@@ -49,49 +43,26 @@ function Signup() {
         })}
         className='signUpForm'
       >
-        <input
-          type='text'
-          {...register('username', {
-            required: 'Required',
-            minLength: 4,
-          })}
-          placeholder='Username'
-        />
-        <p>{errors.username?.message}</p>
-        <input
-          type='email'
-          {...register('email', {
-            required: 'Required',
-            pattern:
-              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          })}
-          placeholder='Email'
-        />
-        <p>{errors.email?.message}</p>
-        <input
-          type='password'
-          {...register('password', {
-            required: 'Required',
-            minLength: {
-              value: 8,
-              message: 'Min length is 8',
-            },
-          })}
-          placeholder='password'
-        />
-        <p>{errors.password?.message}</p>
-        <input
-          type='password'
-          {...register('password2', {
-            required: 'Required',
-            minLength: {
-              value: 8,
-              message: 'Min length is 8',
-            },
-          })}
-          placeholder='password2'
-        />
-        <p>{errors.password?.message}</p>
+        <div className='form-group'>
+          <label htmlFor='username'>Username</label>
+          <input name='username' type='text' {...register('username')} placeholder='Username' />
+          <p>{errors.username?.message}</p>
+        </div>
+        <div className='form-group'>
+          <label htmlFor='email'>Email</label>
+          <input name='email' type='email' {...register('email')} placeholder='Email' />
+          <p>{errors.email?.message}</p>
+        </div>
+        <div className='form-group'>
+          <label htmlFor='password'>Password</label>
+          <input name='password' type='password' {...register('password')} placeholder='Password' />
+          <p>{errors.password?.message}</p>
+        </div>
+        <div className='form-group'>
+          <label htmlFor='password2'>Confirm Password</label>
+          <input name='password2' type='password' {...register('password2')} placeholder='Confirm Password' />
+          <p>{errors.password2?.message}</p>
+        </div>
         <button type='submit'>register</button>
       </form>
       <div>
