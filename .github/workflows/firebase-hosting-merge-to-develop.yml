@@ -3,9 +3,7 @@
 
 name: Deploy on merge to develop branch
 'on':
-  push:
-    branches:
-      - develop
+  pull-request:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
