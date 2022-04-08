@@ -22,7 +22,7 @@ const Topic = styled.div`
 `
 
 const Post = ({ postData }) => {
-  const { title, topics, postBody } = postData
+  const { title, topics, post, postBody } = postData
 
   return (
     <PostCard>
@@ -34,7 +34,7 @@ const Post = ({ postData }) => {
         </Topics>
       ) : null}
       <h3>{title}</h3>
-      <p>{postBody}</p>
+      <p>{post || postBody}</p>
     </PostCard>
   )
 }
