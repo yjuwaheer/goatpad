@@ -68,3 +68,16 @@ Decided that monorepo was unnecessary. So, for ease of use by new members, conve
 ---
 
 ---
+
+### April 7, 2022
+
+Integrate React-hook-form and yup validation in all existing forms
+Automatic deploys to live site on accepted PR's to main branch
+Many attempts for PR preview deployment on firebase.
+
+---
+
+### April 8, 2022
+
+Create develop branch on grammerhub repo and set it as the default branch for PR's
+Add GitHub action to deploy a preview on accepted PR to develop branch
