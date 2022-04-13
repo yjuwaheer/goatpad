@@ -23,11 +23,7 @@ function Login() {
   const { error, login } = useLogin()
 
   async function handleLogin({ email, password }) {
-    try {
-      await login(email, password)
-    } catch (error) {
-      console.error(error)
-    }
+    await login(email, password)
 
     navigate('/')
   }

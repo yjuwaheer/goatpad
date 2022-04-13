@@ -24,7 +24,7 @@ function Signup() {
   const { error, signup } = useSignup()
 
   async function handleSignUp({ displayName, email, password }) {
-    signup(email, password, displayName)
+    await signup(email, password, displayName)
 
     navigate('/')
   }

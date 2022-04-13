@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { auth } from '../config/firebase.ts'
-import { useLogout } from '../hooks/useLogout'
 import styled from 'styled-components'
+import { useLogout } from '../hooks/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const NavbarContainer = styled.div`
   height: 34px;
@@ -29,7 +29,7 @@ const NavbarButtonContainer = styled.div`
 
 const Navbar = () => {
   const { logout } = useLogout()
-  const { currentUser } = auth
+  const { user } = useAuthContext()
 
   return (
     <NavbarContainer>
@@ -40,7 +40,7 @@ const Navbar = () => {
         <Link to='/about'>
           <p>About</p>
         </Link>
-        {!currentUser ? (
+        {!user ? (
           <>
             <Link to='/signup'>
               <p>Signup</p>
