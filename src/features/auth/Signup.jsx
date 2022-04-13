@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../stores/AuthContext'
+import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { signUpSchema } from './formSchema'
+import { useSignup } from '../../hooks/useSignup'
 
 function Signup() {
   const {
@@ -12,7 +12,7 @@ function Signup() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: '',
+      displayName: '',
       email: '',
       password: '',
       password2: '',
@@ -20,18 +20,13 @@ function Signup() {
     resolver: yupResolver(signUpSchema),
   })
 
-  const navigate = useNavigate()
-  const { signup } = useAuth()
+  // const navigate = useNavigate()
+  const { error, signup } = useSignup()
 
-  async function handleSignUp({ username, email, password, password2 }) {
-    try {
-      await signup(email, password)
-      console.log(username, email, password, password2)
-    } catch (error) {
-      console.error('Failed to create an account')
-    }
+  async function handleSignUp({ displayName, email, password }) {
+    signup(email, password, displayName)
 
-    navigate('/')
+    // navigate('/')
   }
 
   return (
@@ -44,9 +39,9 @@ function Signup() {
         className='signUpForm'
       >
         <div className='form-group'>
-          <label htmlFor='username'>Username</label>
-          <input type='text' name='username' {...register('username')} placeholder='Username' />
-          <p>{errors.username?.message}</p>
+          <label htmlFor='displayName'>Username</label>
+          <input type='text' name='displayName' {...register('displayName')} placeholder='Username' />
+          <p>{errors.displayName?.message}</p>
         </div>
         <div className='form-group'>
           <label htmlFor='email'>Email</label>
@@ -67,6 +62,7 @@ function Signup() {
           <button type='submit'>Register</button>
         </div>
       </form>
+      {error && <p>{error}</p>}
       <div>
         <p>Already have an account?</p>
         <Link to='/login'>Login!</Link>

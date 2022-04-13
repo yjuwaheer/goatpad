@@ -25,7 +25,6 @@ const PostForm = () => {
   const { currentUser } = useAuth()
 
   const onSubmit = async (data) => {
-    // TODO: submit data to firebase
     try {
       const docRef = await addDoc(collection(db, 'posts'), {
         ...data,
