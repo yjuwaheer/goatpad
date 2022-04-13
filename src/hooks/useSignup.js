@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import { auth } from '../config/firebase.ts'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 
 export const useSignup = () => {
   const [error, setError] = useState(null)
 
-  const signup = (email, password) => {
+  const signup = (email, password, displayName) => {
     setError(null)
     createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
-        console.log(res.user)
+        updateProfile(res.user, { displayName })
       })
       .catch((err) => {
         setError(err.message)

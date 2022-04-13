@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { signUpSchema } from './formSchema'
@@ -20,13 +20,13 @@ function Signup() {
     resolver: yupResolver(signUpSchema),
   })
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const { error, signup } = useSignup()
 
   async function handleSignUp({ displayName, email, password }) {
     signup(email, password, displayName)
 
-    // navigate('/')
+    navigate('/')
   }
 
   return (

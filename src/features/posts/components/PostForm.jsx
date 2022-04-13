@@ -1,11 +1,11 @@
 import React from 'react'
-import { collection, addDoc } from 'firebase/firestore'
-import { useAuth } from '../../../stores/AuthContext'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-
-import { db } from '../../../config/firebase.ts'
 import { postFormSchema } from './postFormSchema'
+import { useAuth } from '../../../stores/AuthContext'
+
+import { collection, addDoc } from 'firebase/firestore'
+import { db } from '../../../config/firebase.ts'
 
 import { Stack } from '../../../components/styles/Stack.styled'
 
@@ -28,7 +28,7 @@ const PostForm = () => {
     try {
       const docRef = await addDoc(collection(db, 'posts'), {
         ...data,
-        topics: [currentUser.uid],
+        topics: [currentUser.displayName || currentUser.email],
         uid: currentUser.uid,
       })
       console.log('Document written with ID: ', docRef.id)
