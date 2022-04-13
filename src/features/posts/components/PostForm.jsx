@@ -2,10 +2,9 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { postFormSchema } from './postFormSchema'
-import { useAuth } from '../../../stores/AuthContext'
 
 import { collection, addDoc } from 'firebase/firestore'
-import { db } from '../../../config/firebase.ts'
+import { db, auth } from '../../../config/firebase.ts'
 
 import { Stack } from '../../../components/styles/Stack.styled'
 
@@ -22,7 +21,7 @@ const PostForm = () => {
     resolver: yupResolver(postFormSchema),
   })
 
-  const { currentUser } = useAuth()
+  const { currentUser } = auth
 
   const onSubmit = async (data) => {
     try {

@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 // eslint-disable-next-line
 import firebaseApp from './config/firebase.ts'
 
-import { AuthProvider } from './stores/AuthContext'
+import { AuthContextProvider } from './stores/AuthContext'
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -15,7 +15,7 @@ import Profile from './features/profile/Profile'
 
 function App() {
   return (
-    <AuthProvider>
+    <AuthContextProvider>
       <Navbar />
 
       <Routes>
@@ -26,7 +26,7 @@ function App() {
         <Route path='/profile' element={<Profile />} />
       </Routes>
       <Footer />
-    </AuthProvider>
+    </AuthContextProvider>
   )
 }
 

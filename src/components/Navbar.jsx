@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../stores/AuthContext'
+import { auth } from '../config/firebase.ts'
 import { useLogout } from '../hooks/useLogout'
 import styled from 'styled-components'
 
@@ -29,7 +29,7 @@ const NavbarButtonContainer = styled.div`
 
 const Navbar = () => {
   const { logout } = useLogout()
-  const { currentUser } = useAuth()
+  const { currentUser } = auth
 
   return (
     <NavbarContainer>
