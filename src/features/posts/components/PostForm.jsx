@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { postFormSchema } from './postFormSchema'
 
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { db, auth } from '../../../config/firebase.ts'
 
 import { Stack } from '../../../components/styles/Stack.styled'
@@ -17,6 +17,7 @@ const PostForm = () => {
     defaultValues: {
       title: '',
       postBody: '',
+      topics: [],
     },
     resolver: yupResolver(postFormSchema),
   })
@@ -25,10 +26,13 @@ const PostForm = () => {
 
   const onSubmit = async (data) => {
     try {
+      const newTopics = data.topics.split(',').map((topic) => topic.trim())
+      const allTopics = [currentUser.displayName || currentUser.email, ...newTopics]
       const docRef = await addDoc(collection(db, 'posts'), {
         ...data,
-        topics: [currentUser.displayName || currentUser.email],
+        topics: [...allTopics],
         uid: currentUser.uid,
+        timestamp: serverTimestamp(),
       })
       console.log('Document written with ID: ', docRef.id)
     } catch (e) {
@@ -42,6 +46,11 @@ const PostForm = () => {
         <Stack gutter='sm'>
           <label htmlFor='title'>Title</label>
           <input type='text' name='title' {...register('title')} placeholder='Enter a title' />
+          <p>{errors.title?.message}</p>
+        </Stack>
+        <Stack gutter='sm'>
+          <label htmlFor='title'>Topics</label>
+          <input type='text' name='topics' {...register('topics')} placeholder='Enter topics separated by commas' />
           <p>{errors.title?.message}</p>
         </Stack>
         <Stack gutter='sm'>
