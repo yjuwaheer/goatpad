@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { postFormSchema } from './postFormSchema'
@@ -23,8 +24,9 @@ const PostForm = () => {
   })
 
   const { user } = useAuthContext()
+  const navigate = useNavigate()
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
     try {
       const newTopics = data.topics.split(',').map((topic) => topic.trim())
       const allTopics = [user.displayName || user.email, ...newTopics]
@@ -35,13 +37,16 @@ const PostForm = () => {
         timestamp: serverTimestamp(),
       })
       console.log('Document written with ID: ', docRef.id)
-    } catch (e) {
-      console.error('Error adding document: ', e)
+      e.target.reset()
+    } catch (err) {
+      console.error('Error adding document: ', err)
     }
+
+    navigate('/')
   }
 
   return (
-    <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Stack gutter='lg'>
         <Stack gutter='sm'>
           <label htmlFor='title'>Title</label>

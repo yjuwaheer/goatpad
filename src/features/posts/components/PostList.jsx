@@ -1,17 +1,17 @@
 import React from 'react'
-import { usePosts } from '../../../stores/PostContext'
+import { useCollection } from '../../../hooks/useCollection'
 
 import { Stack } from '../../../components/styles/Stack.styled'
 
 import Post from './Post'
 
 const PostList = () => {
-  const { posts } = usePosts()
+  const { documents } = useCollection('posts', null, ['timestamp', 'desc'])
 
   return (
     <Stack gutter='lg'>
       <h2>PostList</h2>
-      {posts && posts.map((post) => <Post postData={post} key={post.id} />)}
+      {documents && documents.map((post) => <Post postData={post} key={post.id} />)}
     </Stack>
   )
 }
