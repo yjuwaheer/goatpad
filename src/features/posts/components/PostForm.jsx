@@ -4,8 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { postFormSchema } from './postFormSchema'
 
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { db, auth } from '../../../config/firebase.ts'
-
+import { db } from '../../../config/firebase.ts'
+import { useAuthContext } from '../../../hooks/useAuthContext'
 import { Stack } from '../../../components/styles/Stack.styled'
 
 const PostForm = () => {
@@ -22,16 +22,16 @@ const PostForm = () => {
     resolver: yupResolver(postFormSchema),
   })
 
-  const { currentUser } = auth
+  const { user } = useAuthContext()
 
   const onSubmit = async (data) => {
     try {
       const newTopics = data.topics.split(',').map((topic) => topic.trim())
-      const allTopics = [currentUser.displayName || currentUser.email, ...newTopics]
+      const allTopics = [user.displayName || user.email, ...newTopics]
       const docRef = await addDoc(collection(db, 'posts'), {
         ...data,
         topics: [...allTopics],
-        uid: currentUser.uid,
+        uid: user.uid,
         timestamp: serverTimestamp(),
       })
       console.log('Document written with ID: ', docRef.id)
