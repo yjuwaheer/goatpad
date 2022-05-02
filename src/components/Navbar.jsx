@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../stores/AuthContext'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useLogout } from '../hooks/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const NavbarContainer = styled.div`
   height: 34px;
@@ -27,17 +28,8 @@ const NavbarButtonContainer = styled.div`
 `
 
 const Navbar = () => {
-  const { currentUser, logout } = useAuth()
-  const navigate = useNavigate()
-
-  async function handleLogout() {
-    try {
-      await logout()
-    } catch (error) {
-      console.error(error)
-    }
-    navigate('/')
-  }
+  const { logout } = useLogout()
+  const { user } = useAuthContext()
 
   return (
     <NavbarContainer>
@@ -48,7 +40,7 @@ const Navbar = () => {
         <Link to='/about'>
           <p>About</p>
         </Link>
-        {!currentUser ? (
+        {!user ? (
           <>
             <Link to='/signup'>
               <p>Signup</p>
@@ -63,7 +55,7 @@ const Navbar = () => {
               <p>Profile</p>
             </Link>
             <Link to='/'>
-              <p onClick={handleLogout}>Logout</p>
+              <p onClick={logout}>Logout</p>
             </Link>
           </>
         )}

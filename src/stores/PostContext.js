@@ -4,13 +4,13 @@ import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../config/firebase.ts'
 import { useEffect } from 'react'
 
-const PostsContext = createContext()
+const PostContext = createContext()
 
 export function usePosts() {
-  return useContext(PostsContext)
+  return useContext(PostContext)
 }
 
-export function PostsProvider({ children }) {
+export function PostContextProvider({ children }) {
   const [posts, setPosts] = useState([])
 
   // This sets the 'posts' as the document we're dealing with
@@ -38,5 +38,5 @@ export function PostsProvider({ children }) {
     getPosts,
   }
 
-  return <PostsContext.Provider value={value}>{children}</PostsContext.Provider>
+  return <PostContext.Provider value={value}>{children}</PostContext.Provider>
 }
