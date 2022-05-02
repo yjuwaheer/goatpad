@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../stores/AuthContext'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { loginSchema } from './formSchema'
+
+import { useLogin } from '../../hooks/useLogin'
 
 function Login() {
   const {
@@ -19,14 +20,10 @@ function Login() {
   })
 
   const navigate = useNavigate()
-  const { login } = useAuth()
+  const { error, login } = useLogin()
 
   async function handleLogin({ email, password }) {
-    try {
-      await login(email, password)
-    } catch (error) {
-      console.error(error)
-    }
+    await login(email, password)
 
     navigate('/')
   }
@@ -51,6 +48,7 @@ function Login() {
           <button type='submit'>Login</button>
         </div>
       </form>
+      {error && <p>{error}</p>}
       <div>
         <p>Don&apos;t have an account yet?</p>
         <Link to='/signup'>Sign Up!</Link>

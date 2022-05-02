@@ -1,44 +1,35 @@
-import React, { createContext, useState, useContext } from 'react'
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
-import { useEffect } from 'react'
+import { onAuthStateChanged } from 'firebase/auth'
+import React, { createContext, useReducer, useEffect } from 'react'
 
-const auth = getAuth()
+import { auth } from '../config/firebase.ts'
 
-const AuthContext = createContext()
+export const AuthContext = createContext()
 
-export function useAuth() {
-  return useContext(AuthContext)
+export const AuthReducer = (state, action) => {
+  switch (action.type) {
+    case 'LOGIN':
+      return { ...state, user: action.payload }
+    case 'LOGOUT':
+      return { ...state, user: null }
+    case 'AUTH_IS_READY':
+      return { ...state, user: action.payload, authIsReady: true }
+    default:
+      return state
+  }
 }
 
-export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState()
-
-  function signup(email, password) {
-    /* TODO: add user to firestore database */
-    return createUserWithEmailAndPassword(auth, email, password)
-  }
-
-  function login(email, password) {
-    return signInWithEmailAndPassword(auth, email, password)
-  }
-
-  function logout() {
-    return auth.signOut()
-  }
+export const AuthContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(AuthReducer, {
+    user: null,
+    authIsReady: false,
+  })
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user)
+    const unsub = onAuthStateChanged(auth, (user) => {
+      dispatch({ type: 'AUTH_IS_READY', payload: user })
+      unsub()
     })
-    return unsubscribe
   }, [])
 
-  const value = {
-    currentUser,
-    signup,
-    login,
-    logout,
-  }
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ ...state, dispatch }}>{children}</AuthContext.Provider>
 }
