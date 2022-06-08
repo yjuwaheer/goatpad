@@ -1,17 +1,32 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-// eslint-disable-next-line
-import firebaseApp from './config/firebase.ts'
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import Login from './features/auth/Login'
-import Signup from './features/auth/Signup'
-import Posts from './features/posts'
-import About from './features/about/About'
-import Profile from './features/profile/Profile'
 
-import { GlobalContainer } from './components/styles/Wrapper.styled'
+import Posts from './pages/Posts';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import About from './pages/About';
+import Profile from './pages/Profile';
+
+// Import styles components
+import styled from 'styled-components'
+
+// Global container that wraps the whole app
+export const GlobalContainer = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+  font-family: 'Poppins', sans-serif;
+  padding: none;
+  margin: none;
+  box-sizing: border-box;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+`
 
 function App() {
   return (

@@ -2,13 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { postFormSchema } from './postFormSchema'
+import { postFormSchema } from '../../schemas/postFormSchema'
 import styled from 'styled-components'
 
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { db } from '../../../config/firebase.ts'
-import { useAuthContext } from '../../../hooks/useAuthContext'
-import { Stack } from '../../../components/styles/Stack.styled'
+import { db } from '../../config/firebase.ts'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 // Styled components
 const CreatePostContainer = styled.div`
@@ -116,24 +115,24 @@ const PostForm = () => {
   return (
     <CreatePostContainer>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Stack gutter='lg'>
-          <Stack gutter='sm'>
+        <div gutter='lg'>
+          <div gutter='sm'>
             <Label htmlFor='title'>Title</Label>
             <Input type='text' name='title' {...register('title')} placeholder='Enter a title' />
             <Error>{errors.title?.message}</Error>
-          </Stack>
-          <Stack gutter='sm'>
+          </div>
+          <div gutter='sm'>
             <Label htmlFor='title'>Topics</Label>
             <Input type='text' name='topics' {...register('topics')} placeholder='Enter topics separated by commas' />
             <Error>{errors.title?.message}</Error>
-          </Stack>
-          <Stack gutter='sm'>
+          </div>
+          <div gutter='sm'>
             <Label htmlFor='postBody'>Body</Label>
             <Textarea name='postBody' {...register('postBody')} placeholder='Enter your post' rows='6' />
             <Error>{errors.postBody?.message}</Error>
-          </Stack>
+          </div>
           <Button type='submit'>Create Post</Button>
-        </Stack>
+        </div>
       </Form>
     </CreatePostContainer>
   )

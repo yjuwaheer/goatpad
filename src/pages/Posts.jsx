@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { useAuthContext } from '../../hooks/useAuthContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 
-import PostList from './components/PostList'
-import PostForm from './components/PostForm'
+import PostList from '../components/posts/PostList'
+import PostForm from '../components/posts/PostForm'
 
 const Posts = () => {
   const { user } = useAuthContext()

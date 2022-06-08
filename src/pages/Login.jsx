@@ -2,9 +2,9 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { loginSchema } from './formSchema'
+import { loginSchema } from '../schemas/formSchema'
 
-import { useLogin } from '../../hooks/useLogin'
+import { useLogin } from '../hooks/useLogin'
 
 function Login() {
   const {
