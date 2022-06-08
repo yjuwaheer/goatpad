@@ -11,9 +11,11 @@ import Posts from './features/posts'
 import About from './features/about/About'
 import Profile from './features/profile/Profile'
 
+import { GlobalContainer } from './components/styles/Wrapper.styled'
+
 function App() {
   return (
-    <>
+    <GlobalContainer>
       <Navbar />
 
       <Routes>
@@ -24,7 +26,7 @@ function App() {
         <Route path='/profile' element={<Profile />} />
       </Routes>
       <Footer />
-    </>
+    </GlobalContainer>
   )
 }
 

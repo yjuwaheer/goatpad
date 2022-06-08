@@ -10,7 +10,7 @@ const PostList = () => {
 
   return (
     <Stack gutter='lg'>
-      <h2>PostList</h2>
+      <h2>Posts List</h2>
       {documents && documents.map((post) => <Post postData={post} key={post.id} />)}
     </Stack>
   )

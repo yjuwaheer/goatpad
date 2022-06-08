@@ -5,26 +5,48 @@ import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 const NavbarContainer = styled.div`
-  height: 34px;
+  height: 75px;
   width: 100vw;
-  background-color: #ccc;
+  background-color: #c7c7f0;
   margin-top: 0px;
-  padding: 5px;
+  padding: 20px;
   margin-bottom: 20px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 620px) {
+    justify-content: center;
+  }
 `
 
 const AppTitle = styled.h1`
-  font-size: 20px;
+  font-size: 30px;
   margin-top: 0px;
+  color: #fff;
+
+  @media (max-width: 620px) {
+    display: none;
+  }
 `
 
 const NavbarButtonContainer = styled.div`
-  width: 30%;
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  a {
+    color: #fff;
+    font-size: 20px;
+    border-bottom: 1px solid #fff;
+    padding: 0 5px;
+    margin: 0 2rem;
+  }
+
+  a:hover {
+    color: rgba(30, 30, 100, 0.8);
+    border-bottom: 5px solid #fff;
+  }
 `
 
 const Navbar = () => {
@@ -34,7 +56,7 @@ const Navbar = () => {
   return (
     <NavbarContainer>
       <Link to='/'>
-        <AppTitle>Goatpad</AppTitle>
+        <AppTitle>G o a t p a d</AppTitle>
       </Link>
       <NavbarButtonContainer>
         <Link to='/about'>
