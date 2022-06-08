@@ -19,16 +19,39 @@ const Tag = styled.div`
   margin-bottom: 2px;
 `
 
-export const TopicBar = styled.div`
+const TopicBar = styled.div`
   background-color: rgba(30, 30, 100, 0.8);
   padding: 2px 0px 2px 4px;
   display: flex;
 `
 
+const PostTitle = styled.h3`
+  margin: 0 1rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+`
+
+const PostBody = styled.p`
+  margin: 0 1rem;
+  font-size: 1.1rem;
+`
+
+const PostDate = styled.p`
+  margin: 0 1rem;
+  font-size: 0.9rem;
+  text-align: right;
+  color: #bbb;
+
+  span {
+    color: #888;
+  }
+`
+
 const Post = ({ postData }) => {
   const { title, topics, post, postBody, timestamp } = postData
 
-  const postedAt = timestamp?.toDate().toString() || null
+  const postedDate = timestamp?.toDate().toDateString() || null
+  const postedTime = timestamp?.toDate().toLocaleTimeString() || null
 
   return (
     
@@ -40,9 +63,9 @@ const Post = ({ postData }) => {
             ))}
           </TopicBar>
         ) : null}
-        <h3>{title}</h3>
-        <p>{post || postBody}</p>
-        {postedAt && <p>Posted at: {postedAt}</p>}
+        <PostTitle>{title}</PostTitle>
+        <PostBody>{post || postBody}</PostBody>
+        {postedDate && <PostDate>Posted on <span>{postedDate}</span> at <span>{postedTime}</span></PostDate>}
       </PostCard>
     
   )
