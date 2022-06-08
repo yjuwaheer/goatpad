@@ -28,6 +28,12 @@ const Form = styled.form`
   }
 `
 
+const Stack = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+`
+
 const Label = styled.label`
   font-size: 1.2rem;
   font-weight: bold;
@@ -63,7 +69,7 @@ const Error = styled.p`
 
 const Button = styled.button`
   width: 200px;
-  justify-self: center;
+  align-self: center;
   padding: 0.2rem;
   background-color: rgba(30, 30, 100, 0.5);
   border-radius: 5px;
@@ -115,24 +121,22 @@ const PostForm = () => {
   return (
     <CreatePostContainer>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <div gutter='lg'>
-          <div gutter='sm'>
-            <Label htmlFor='title'>Title</Label>
-            <Input type='text' name='title' {...register('title')} placeholder='Enter a title' />
-            <Error>{errors.title?.message}</Error>
-          </div>
-          <div gutter='sm'>
-            <Label htmlFor='title'>Topics</Label>
-            <Input type='text' name='topics' {...register('topics')} placeholder='Enter topics separated by commas' />
-            <Error>{errors.title?.message}</Error>
-          </div>
-          <div gutter='sm'>
-            <Label htmlFor='postBody'>Body</Label>
-            <Textarea name='postBody' {...register('postBody')} placeholder='Enter your post' rows='6' />
-            <Error>{errors.postBody?.message}</Error>
-          </div>
-          <Button type='submit'>Create Post</Button>
-        </div>
+        <Stack>
+          <Label htmlFor='title'>Title</Label>
+          <Input type='text' name='title' {...register('title')} placeholder='Enter a title' />
+          <Error>{errors.title?.message}</Error>
+        </Stack>
+        <Stack>
+          <Label htmlFor='title'>Topics</Label>
+          <Input type='text' name='topics' {...register('topics')} placeholder='Enter topics separated by commas' />
+          <Error>{errors.title?.message}</Error>
+        </Stack>
+        <Stack>
+          <Label htmlFor='postBody'>Body</Label>
+          <Textarea name='postBody' {...register('postBody')} placeholder='Enter your post' rows='6' />
+          <Error>{errors.postBody?.message}</Error>
+        </Stack>
+        <Button type='submit'>Create Post</Button>
       </Form>
     </CreatePostContainer>
   )
