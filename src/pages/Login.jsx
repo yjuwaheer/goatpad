@@ -74,7 +74,7 @@ function Login() {
           <Error>{errors.email?.message}</Error>
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="password">Email</Label>
+          <Label htmlFor="password">Password</Label>
           <Input
             type="password"
             name="password"
