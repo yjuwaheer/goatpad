@@ -11,7 +11,13 @@ const PostListContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 50px;
+  margin: 0 50px;
+  width: 100%;
+
+  @media (max-width: 1150px) {
+    margin: 50px;
+    width: auto;
+  }
 `;
 
 const PostHeading = styled.h1`

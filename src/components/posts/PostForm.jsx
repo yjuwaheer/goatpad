@@ -22,6 +22,17 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 const CreatePostContainer = styled.div`
   display: flex;
   justify-content: center;
+  height: 100%;
+  width: 500px;
+  margin: 50px;
+  position: sticky;
+  top: 0;
+
+  @media (max-width: 1150px) {
+    position: static;
+    margin: 0;
+    width: 100%;
+  }
 `;
 
 const PostForm = () => {
