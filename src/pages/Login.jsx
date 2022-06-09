@@ -23,6 +23,10 @@ const LoginContainer = styled.div`
   align-items: center;
 `;
 
+const LoginHeading = styled.h1`
+  margin-bottom: 10px;
+`;
+
 const SignupRedirect = styled.div`
   a {
     text-decoration: underline;
@@ -58,6 +62,7 @@ function Login() {
 
   return (
     <LoginContainer>
+      <LoginHeading>Log In</LoginHeading>
       <Form
         onSubmit={handleSubmit((data) => {
           handleLogin(data);

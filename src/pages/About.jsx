@@ -8,6 +8,10 @@ const AboutContainer = styled.div`
   margin: 0 2rem;
 `;
 
+const AboutHeading = styled.h1`
+  margin-bottom: 10px;
+`;
+
 const Highlights = styled.p`
   font-size: 1.1rem;
   background-color: #f5f5f5;
@@ -46,7 +50,7 @@ const AboutFooter = styled.div`
 const About = () => {
   return (
     <AboutContainer>
-      <h1>About</h1>
+      <AboutHeading>About</AboutHeading>
       <Highlights>
         Grammerhub is a meetup for new Devs pursuing their first Dev job, those
         leveling up their skills for mid-level positions, or just starting in
