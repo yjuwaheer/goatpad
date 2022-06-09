@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -34,19 +34,6 @@ const NavbarButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-
-  a {
-    color: #fff;
-    font-size: 20px;
-    border-bottom: 1px solid #fff;
-    padding: 0 5px;
-    margin: 0 2rem;
-  }
-
-  a:hover {
-    color: rgba(30, 30, 100, 0.8);
-    border-bottom: 5px solid #fff;
-  }
 `;
 
 const Navbar = () => {
@@ -59,24 +46,44 @@ const Navbar = () => {
         <AppTitle>G o a t p a d</AppTitle>
       </Link>
       <NavbarButtonContainer>
-        <Link to="/about">
+        <NavLink
+          className={(navData) =>
+            navData.isActive ? "navLinkActive" : "navLink"
+          }
+          to="/about"
+        >
           <p>About</p>
-        </Link>
+        </NavLink>
         {!user ? (
           <>
-            <Link to="/signup">
+            <NavLink
+              className={(navData) =>
+                navData.isActive ? "navLinkActive" : "navLink"
+              }
+              to="/signup"
+            >
               <p>Signup</p>
-            </Link>
-            <Link to="/login">
+            </NavLink>
+            <NavLink
+              className={(navData) =>
+                navData.isActive ? "navLinkActive" : "navLink"
+              }
+              to="/login"
+            >
               <p>Login</p>
-            </Link>
+            </NavLink>
           </>
         ) : (
           <>
-            <Link to="/profile">
+            <NavLink
+              className={(navData) =>
+                navData.isActive ? "navLinkActive" : "navLink"
+              }
+              to="/profile"
+            >
               <p>Profile</p>
-            </Link>
-            <Link to="/">
+            </NavLink>
+            <Link className="navLink" to="/">
               <p onClick={logout}>Logout</p>
             </Link>
           </>
