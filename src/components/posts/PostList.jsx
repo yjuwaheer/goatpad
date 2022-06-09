@@ -22,9 +22,9 @@ const LoadingPost = styled.div`
   background-color: #A4A4A4;
   width: 100%;
   height: 100px;
-  animation: loading 1s linear infinite;
+  animation: loading 0.4s linear infinite;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   @keyframes loading {
     0% {
