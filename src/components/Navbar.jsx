@@ -5,7 +5,7 @@ import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 const NavbarContainer = styled.div`
-  height: 75px;
+  height: 8vh;
   width: 100vw;
   background-color: #c7c7f0;
   margin-top: 0px;
