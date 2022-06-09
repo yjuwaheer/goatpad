@@ -55,9 +55,11 @@ function Login() {
   const { error, login } = useLogin();
 
   async function handleLogin({ email, password }) {
-    await login(email, password);
+    const success = await login(email, password);
 
-    navigate("/");
+    if (success) {
+      navigate("/");
+    }
   }
 
   return (
