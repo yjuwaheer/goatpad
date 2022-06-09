@@ -5,6 +5,34 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schemas/formSchema";
 
 import { useLogin } from "../hooks/useLogin";
+import styled from "styled-components";
+
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Error,
+  Button,
+} from "../styles/Common.styles";
+
+// Styled components
+const LoginContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SignupRedirect = styled.div`
+  a {
+    text-decoration: underline;
+
+    &:hover {
+      cursor: pointer;
+      color: rgba(30, 30, 100, 0.8);
+    }
+  }
+`;
 
 function Login() {
   const {
@@ -29,41 +57,43 @@ function Login() {
   }
 
   return (
-    <>
-      <form
+    <LoginContainer>
+      <Form
         onSubmit={handleSubmit((data) => {
           handleLogin(data);
         })}
-        className="loginForm"
       >
-        <div className="form-group">
-          <input
+        <FormGroup>
+          <Label htmlFor="email">Email</Label>
+          <Input
             type="email"
             name="email"
             {...register("email")}
             placeholder="Email"
           />
-          <p>{errors.email?.message}</p>
-        </div>
-        <div className="form-group">
-          <input
+          <Error>{errors.email?.message}</Error>
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="password">Email</Label>
+          <Input
             type="password"
             name="password"
             {...register("password")}
             placeholder="Password"
           />
           <p>{errors.password?.message}</p>
-        </div>
-        <div className="form-group">
-          <button type="submit">Login</button>
-        </div>
-      </form>
-      {error && <p>{error}</p>}
-      <div>
-        <p>Don&apos;t have an account yet?</p>
-        <Link to="/signup">Sign Up!</Link>
-      </div>
-    </>
+        </FormGroup>
+
+        <Button type="submit">Login</Button>
+      </Form>
+
+      {error && <Error>{error}</Error>}
+
+      <SignupRedirect>
+        Don&apos;t have an account yet?
+        <Link to="/signup"> Sign Up!</Link>
+      </SignupRedirect>
+    </LoginContainer>
   );
 }
 

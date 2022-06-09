@@ -107,7 +107,8 @@ function Signup() {
 
         <Button type="submit">Register</Button>
       </Form>
-      <Error>{error && <p>{error}</p>}</Error>
+
+      {error && <Error>{error}</Error>}
 
       <LoginRedirect>
         Already have an account?
