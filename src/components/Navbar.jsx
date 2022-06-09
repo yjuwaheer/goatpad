@@ -1,8 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { useLogout } from '../hooks/useLogout'
-import { useAuthContext } from '../hooks/useAuthContext'
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { useLogout } from "../hooks/useLogout";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const NavbarContainer = styled.div`
   height: 8vh;
@@ -18,7 +18,7 @@ const NavbarContainer = styled.div`
   @media (max-width: 620px) {
     justify-content: center;
   }
-`
+`;
 
 const AppTitle = styled.h1`
   font-size: 30px;
@@ -28,7 +28,7 @@ const AppTitle = styled.h1`
   @media (max-width: 620px) {
     display: none;
   }
-`
+`;
 
 const NavbarButtonContainer = styled.div`
   display: flex;
@@ -47,43 +47,43 @@ const NavbarButtonContainer = styled.div`
     color: rgba(30, 30, 100, 0.8);
     border-bottom: 5px solid #fff;
   }
-`
+`;
 
 const Navbar = () => {
-  const { logout } = useLogout()
-  const { user } = useAuthContext()
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
 
   return (
     <NavbarContainer>
-      <Link to='/'>
+      <Link to="/">
         <AppTitle>G o a t p a d</AppTitle>
       </Link>
       <NavbarButtonContainer>
-        <Link to='/about'>
+        <Link to="/about">
           <p>About</p>
         </Link>
         {!user ? (
           <>
-            <Link to='/signup'>
+            <Link to="/signup">
               <p>Signup</p>
             </Link>
-            <Link to='/login'>
+            <Link to="/login">
               <p>Login</p>
             </Link>
           </>
         ) : (
           <>
-            <Link to='/profile'>
+            <Link to="/profile">
               <p>Profile</p>
             </Link>
-            <Link to='/'>
+            <Link to="/">
               <p onClick={logout}>Logout</p>
             </Link>
           </>
         )}
       </NavbarButtonContainer>
     </NavbarContainer>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

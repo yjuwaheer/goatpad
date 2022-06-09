@@ -1,10 +1,10 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { loginSchema } from '../schemas/formSchema'
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "../schemas/formSchema";
 
-import { useLogin } from '../hooks/useLogin'
+import { useLogin } from "../hooks/useLogin";
 
 function Login() {
   const {
@@ -13,48 +13,58 @@ function Login() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
     resolver: yupResolver(loginSchema),
-  })
+  });
 
-  const navigate = useNavigate()
-  const { error, login } = useLogin()
+  const navigate = useNavigate();
+  const { error, login } = useLogin();
 
   async function handleLogin({ email, password }) {
-    await login(email, password)
+    await login(email, password);
 
-    navigate('/')
+    navigate("/");
   }
 
   return (
     <>
       <form
         onSubmit={handleSubmit((data) => {
-          handleLogin(data)
+          handleLogin(data);
         })}
-        className='loginForm'
+        className="loginForm"
       >
-        <div className='form-group'>
-          <input type='email' name='email' {...register('email')} placeholder='Email' />
+        <div className="form-group">
+          <input
+            type="email"
+            name="email"
+            {...register("email")}
+            placeholder="Email"
+          />
           <p>{errors.email?.message}</p>
         </div>
-        <div className='form-group'>
-          <input type='password' name='password' {...register('password')} placeholder='Password' />
+        <div className="form-group">
+          <input
+            type="password"
+            name="password"
+            {...register("password")}
+            placeholder="Password"
+          />
           <p>{errors.password?.message}</p>
         </div>
-        <div className='form-group'>
-          <button type='submit'>Login</button>
+        <div className="form-group">
+          <button type="submit">Login</button>
         </div>
       </form>
       {error && <p>{error}</p>}
       <div>
         <p>Don&apos;t have an account yet?</p>
-        <Link to='/signup'>Sign Up!</Link>
+        <Link to="/signup">Sign Up!</Link>
       </div>
     </>
-  )
+  );
 }
 
-export default Login
+export default Login;

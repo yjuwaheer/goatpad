@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
-import App from './App'
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
 
-import { AuthContextProvider } from './stores/AuthContext'
-import { PostContextProvider } from './stores/PostContext'
+import { AuthContextProvider } from "./stores/AuthContext";
+import { PostContextProvider } from "./stores/PostContext";
 
-import './index.css'
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,5 +18,5 @@ ReactDOM.render(
       </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
-)
+  document.getElementById("root")
+);

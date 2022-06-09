@@ -1,42 +1,42 @@
-import React, { createContext, useContext, useState } from 'react'
-import { collection, getDocs } from 'firebase/firestore'
+import React, { createContext, useContext, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
 
-import { db } from '../config/firebase.ts'
-import { useEffect } from 'react'
+import { db } from "../config/firebase.ts";
+import { useEffect } from "react";
 
-const PostContext = createContext()
+const PostContext = createContext();
 
 export function usePosts() {
-  return useContext(PostContext)
+  return useContext(PostContext);
 }
 
 export function PostContextProvider({ children }) {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
 
   // This sets the 'posts' as the document we're dealing with
-  const colRef = collection(db, 'posts')
+  const colRef = collection(db, "posts");
 
   useEffect(() => {
-    getPosts()
-  }, [])
+    getPosts();
+  }, []);
 
   function getPosts() {
     getDocs(colRef).then((res) => {
       const postListData = res.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
-      }))
+      }));
 
-      setPosts(postListData)
-    })
+      setPosts(postListData);
+    });
 
-    return posts
+    return posts;
   }
 
   const value = {
     posts,
     getPosts,
-  }
+  };
 
-  return <PostContext.Provider value={value}>{children}</PostContext.Provider>
+  return <PostContext.Provider value={value}>{children}</PostContext.Provider>;
 }
