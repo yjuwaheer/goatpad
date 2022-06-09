@@ -28,7 +28,7 @@ const Form = styled.form`
   }
 `
 
-const Stack = styled.div`
+const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
@@ -121,21 +121,21 @@ const PostForm = () => {
   return (
     <CreatePostContainer>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Stack>
+        <FormGroup>
           <Label htmlFor='title'>Title</Label>
           <Input type='text' name='title' {...register('title')} placeholder='Enter a title' />
           <Error>{errors.title?.message}</Error>
-        </Stack>
-        <Stack>
+        </FormGroup>
+        <FormGroup>
           <Label htmlFor='title'>Topics</Label>
           <Input type='text' name='topics' {...register('topics')} placeholder='Enter topics separated by commas' />
           <Error>{errors.title?.message}</Error>
-        </Stack>
-        <Stack>
+        </FormGroup>
+        <FormGroup>
           <Label htmlFor='postBody'>Body</Label>
           <Textarea name='postBody' {...register('postBody')} placeholder='Enter your post' rows='6' />
           <Error>{errors.postBody?.message}</Error>
-        </Stack>
+        </FormGroup>
         <Button type='submit'>Create Post</Button>
       </Form>
     </CreatePostContainer>
