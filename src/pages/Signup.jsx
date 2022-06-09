@@ -55,9 +55,11 @@ function Signup() {
   const { error, signup } = useSignup();
 
   async function handleSignUp({ displayName, email, password }) {
-    await signup(email, password, displayName);
+    const success = await signup(email, password, displayName);
 
-    navigate("/");
+    if (success) {
+      navigate("/");
+    }
   }
 
   return (

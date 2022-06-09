@@ -27,6 +27,7 @@ export const useSignup = () => {
       if (!isCancelled) {
         setIsPending(false);
         setError(null);
+        return true;
       }
     } catch (err) {
       if (!isCancelled) {
