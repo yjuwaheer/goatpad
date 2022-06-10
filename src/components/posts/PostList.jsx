@@ -10,7 +10,7 @@ const PostListContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  
   margin: 0 50px;
   width: 100%;
 
@@ -41,6 +41,18 @@ const LoadingPost = styled.div`
     }
 `;
 
+const NoPosts = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  background-color: #fafafa;
+  color: #A4A4A4;
+  border-radius: 5px;
+`;
+
 const PostList = () => {
   const { documents } = useCollection("posts", null, ["timestamp", "desc"]);
 
@@ -50,6 +62,13 @@ const PostList = () => {
       {!documents && <LoadingPost></LoadingPost>}
       {!documents && <LoadingPost></LoadingPost>}
       {!documents && <LoadingPost></LoadingPost>}
+
+      {documents && documents.length == 0 && (
+        <NoPosts>
+          <h3>No posts yet</h3>
+          <h4>Try adding one</h4>
+        </NoPosts>
+      )}
 
       {documents &&
         documents.map((post) => <Post postData={post} key={post.id} />)}
