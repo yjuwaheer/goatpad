@@ -39,6 +39,7 @@ const PostForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -62,6 +63,7 @@ const PostForm = () => {
         uid: user.uid,
         timestamp: serverTimestamp(),
       });
+      reset();
       console.log("Document written with ID: ", docRef.id);
       e.target.reset();
     } catch (err) {
