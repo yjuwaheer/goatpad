@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -53,11 +53,14 @@ function Signup() {
 
   const navigate = useNavigate();
   const { error, signup } = useSignup();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleSignUp({ displayName, email, password }) {
+    setIsLoading(true);
     const success = await signup(email, password, displayName);
 
     if (success) {
+      setIsLoading(false);
       navigate("/");
     }
   }
@@ -111,7 +114,9 @@ function Signup() {
           <Error>{errors.password2?.message}</Error>
         </FormGroup>
 
-        <Button type="submit">Register</Button>
+        <Button type="submit" disabled={!error && isLoading ? true : false}>
+          {!error && isLoading ? "Loading..." : "Register"}
+        </Button>
       </Form>
 
       {error && <Error>{error}</Error>}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -53,11 +53,14 @@ function Login() {
 
   const navigate = useNavigate();
   const { error, login } = useLogin();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleLogin({ email, password }) {
+    setIsLoading(true);
     const success = await login(email, password);
 
     if (success) {
+      setIsLoading(false);
       navigate("/");
     }
   }
@@ -91,7 +94,9 @@ function Login() {
           <p>{errors.password?.message}</p>
         </FormGroup>
 
-        <Button type="submit">Login</Button>
+        <Button type="submit" disabled={!error && isLoading ? true : false}>
+          {!error && isLoading ? "Loading..." : "Login"}
+        </Button>
       </Form>
 
       {error && <Error>{error}</Error>}
