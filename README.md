@@ -22,3 +22,26 @@
 ## Please Add Documentation
 
 You can find the `ProjectLog.md` file in the root of the project. Please write a short description of what you are doing as you write a new piece of the app.
+
+## Project Structure
+
+```
+src
+|--- assets
+|--- components
+|    |--- posts [matches name of page - lowercase]
+|    |    |--- Post.jsx
+|--- config
+|--- hooks
+|--- pages
+|    |--- Posts.jsx
+|--- schemas
+|--- stores
+|--- styles
+|    |--- Common.styles.js
+|--- test
+|--- utils
+```
+
+Any frequently used styles should be placed in the `Common.styles.js` file. \
+Otherwise create them within their own `page` or `component`.

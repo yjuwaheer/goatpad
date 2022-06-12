@@ -1,15 +1,14 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-// eslint-disable-next-line
-import firebaseApp from './config/firebase.ts'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import Login from './features/auth/Login'
-import Signup from './features/auth/Signup'
-import Posts from './features/posts'
-import About from './features/about/About'
-import Profile from './features/profile/Profile'
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
+import Posts from "./pages/Posts";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import About from "./pages/About";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -17,15 +16,15 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path='/' element={<Posts />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path="/" element={<Posts />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

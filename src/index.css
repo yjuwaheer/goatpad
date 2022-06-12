@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 /* Box sizing rules */
 *,
 *::before,
@@ -20,8 +22,8 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role='list'],
-ol[role='list'] {
+ul[role="list"],
+ol[role="list"] {
   list-style: none;
 }
 
@@ -35,7 +37,13 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  font-family: Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Remove links default style */
+a {
+  text-decoration: none;
+  color: black;
 }
 
 /* A elements that don't have a class get default styles */
@@ -72,4 +80,27 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* NavLink style */
+.navLink {
+  color: #fff;
+  font-size: 20px;
+  border-bottom: 1px solid #fff;
+  padding: 0 5px;
+  margin: 0 2rem;
+}
+
+.navLink:hover {
+  color: rgba(30, 30, 100, 0.8);
+  border-bottom: 5px solid #fff;
+}
+
+/* Active NavLink style */
+.navLinkActive {
+  font-size: 20px;
+  padding: 0 5px;
+  margin: 0 2rem;
+  color: rgba(30, 30, 100, 0.8);
+  border-bottom: 5px solid #fff;
 }
